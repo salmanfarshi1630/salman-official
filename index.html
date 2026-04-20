@@ -262,20 +262,61 @@
         </div>
     </div>
 
-    <div id="gallery" class="page-section">
-        <h2 class="bn"><i class="fas fa-images"></i> ফটো গ্যালারি</h2>
-        <div class="gallery-cats">
-            <div class="cat-card" onclick="showGallery('personal')"><i class="fas fa-user"></i><br>নিজের ছবি</div>
-            <div class="cat-card" onclick="showGallery('madrasa')"><i class="fas fa-mosque"></i><br>মাদরাসার ছবি</div>
-            <div class="cat-card" onclick="showGallery('training')"><i class="fas fa-shield-alt"></i><br>ট্রেনিংয়ের ছবি</div>
-            <div class="cat-card" onclick="showGallery('election')"><i class="fas fa-vote-yea"></i><br>নির্বাচনের ছবি</div>
-        </div>
+   <div id="gallery" class="page-section" style="text-align: center; padding: 20px 10px; background: #ffffff; border-radius: 20px;">
+    <h2 class="bn" style="color:var(--primary); font-size: 24px; margin-bottom: 20px;"><i class="fas fa-images"></i> গ্যালারি ও ফটো</h2>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 25px;">
+        <button class="p-btn" onclick="loadPhotos('personal', this)"><i class="fas fa-user"></i> আমার ছবি</button>
+        <button class="p-btn" onclick="loadPhotos('madrasa', this)"><i class="fas fa-mosque"></i> মাদরাসা</button>
+        <button class="p-btn" onclick="loadPhotos('training', this)"><i class="fas fa-shield-alt"></i> ট্রেনিং</button>
+        <button class="p-btn" onclick="loadPhotos('election', this)"><i class="fas fa-vote-yea"></i> নির্বাচন</button>
     </div>
 
-    <div id="resources" class="page-section">
+    <div id="photo-display" class="photo-display">
+        <p class="bn" style="color: #ccc; font-size: 14px; padding: 20px;">বাটনে ক্লিক করে ছবিগুলো দেখুন</p>
+    </div>
+</div>
+
+<style>
+    .p-btn { padding: 10px 15px; border: 1px solid #eee; background: #fff; color: var(--primary); border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; display: flex; align-items: center; gap: 5px; font-size: 14px; }
+    .p-btn.active, .p-btn:hover { background: var(--primary); color: white; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .photo-display { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; padding: 5px; }
+    .p-img { width: 100%; height: 140px; object-fit: cover; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); cursor: pointer; animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+</style>
+
+<script>
+    // এই স্ক্রিপ্টটি অন্য সব কোডের সাথে মিশবে না, এটি আলাদাভাবে কাজ করবে
+    function fixLink(url) { 
+        return url.replace("ibb.co.com", "i.ibb.co") + ".jpg"; 
+    }
+    
+    const myCollection = {
+        training: ["https://ibb.co.com/1GCPXNyq","https://ibb.co.com/mC76D7jT","https://ibb.co.com/r2f4bHb6","https://ibb.co.com/8DKBXHVL","https://ibb.co.com/Q31qJRxH","https://ibb.co.com/Z6YtHL06","https://ibb.co.com/ccgWG3gM","https://ibb.co.com/kVtpmCQ0","https://ibb.co.com/tp7WgxJC","https://ibb.co.com/tPTp9Hrq","https://ibb.co.com/TpWsnry","https://ibb.co.com/QvhBhSnL","https://ibb.co.com/BVCNK1Gr","https://ibb.co.com/ZzXfB9pf","https://ibb.co.com/kkxvh75","https://ibb.co.com/S26f1k0","https://ibb.co.com/Psfsrwg2","https://ibb.co.com/r26VtTJH"],
+        election: ["https://ibb.co.com/kVgc2Znj","https://ibb.co.com/wh8DxxjF","https://ibb.co.com/d0d7fkp5","https://ibb.co.com/VWx6dXxg","https://ibb.co.com/R4DVKHCQ","https://ibb.co.com/XxxXTNQ9","https://ibb.co.com/Dx4sWcm","https://ibb.co.com/67Y1tLrq","https://ibb.co.com/b58PZS6K","https://ibb.co.com/Jj1JN3d5"],
+        madrasa: ["https://ibb.co.com/MxrNgzBK","https://ibb.co.com/w2KvnpN","https://ibb.co.com/N6dT6Vhc","https://ibb.co.com/spqnvtM2","https://ibb.co.com/8g2WFWtF","https://ibb.co.com/W4mdZr90","https://ibb.co.com/nMHCwQrB","https://ibb.co.com/dw6B10Lx","https://ibb.co.com/LDQcq5zd","https://ibb.co.com/5xWbYQKh","https://ibb.co.com/0Vh6xXfJ","https://ibb.co.com/V0VS5RLx","https://ibb.co.com/wFrSqdNf","https://ibb.co.com/5gF3wzH0"],
+        personal: ["https://ibb.co.com/pBJPyPxZ","https://ibb.co.com/JRgVV795","https://ibb.co.com/G4QszZx3","https://ibb.co.com/WWWhsNhk","https://ibb.co.com/QvWtFryG","https://ibb.co.com/wN3chGfq","https://ibb.co.com/6RXTLR9d","https://ibb.co.com/kdv6r7D","https://ibb.co.com/ns90dzs1","https://ibb.co.com/q3NkP1C2","https://ibb.co.com/twxvgjTK","https://ibb.co.com/vvzQmq3x","https://ibb.co.com/Xxz5ZLFz","https://ibb.co.com/hRkjRfFs","https://ibb.co.com/GQh4Kgdb","https://ibb.co.com/7xYTx9YR","https://ibb.co.com/4wy3ds9t","https://ibb.co.com/WvTdHFTk","https://ibb.co.com/4Z7bM2nZ","https://ibb.co.com/zhzJtGDw"]
+    };
+
+    function loadPhotos(category, element) {
+        document.querySelectorAll('.p-btn').forEach(btn => btn.classList.remove('active'));
+        element.classList.add('active');
+        const display = document.getElementById('photo-display');
+        display.innerHTML = "";
+        myCollection[category].forEach(url => {
+            const img = document.createElement('img');
+            img.src = fixLink(url);
+            img.className = 'p-img';
+            img.onclick = () => window.open(url, '_blank');
+            img.onerror = function() { this.style.display='none'; };
+            display.appendChild(img);
+        });
+    }
+</script>
+ div idiv id="resources" class="page-section">
         <h2 class="bn"><i class="fas fa-download"></i> রিসোর্স ও ডাউনলোড</h2>
         <div style="display: flex; flex-wrap: wrap; gap: 15px;">
-            <div style="flex: 1; min-width: 250px; background: rgba(0,119,182,0.1); padding: 20px; border-radius: 10px; text-align: center;">
+        div <div style="flex: 1; min-width: 250px; background: rgba(0,119,182,0.1); padding: 20px; border-radius: 10px; text-align: center;">
                 <h3>📖 ইসলামিক বই</h3>
                 <a href="https://drive.google.com/drive/folders/1LN45UWOFNsS8olqcDPpLKhMNuTjglkeJ" target="_blank" class="btn-box">বই পড়ুন</a>
             </div>
