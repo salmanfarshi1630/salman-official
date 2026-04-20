@@ -286,6 +286,54 @@
 </style>
 
 <script>
+    // এই ফাংশনটি ImgBB এর লিঙ্কগুলোকে সরাসরি ইমেজে রূপান্তর করবে
+    function fixLink(url) {
+        // ImgBB পেজ লিঙ্ক থেকে সরাসরি ইমেজ লিঙ্কে রূপান্তর
+        const id = url.split('/').pop();
+        return "https://i.ibb.co/" + id + "/image.jpg";
+    }
+
+    const myCollection = {
+        training: ["1GCPXNyq","mC76D7jT","r2f4bHb6","8DKBXHVL","Q31qJRxH","Z6YtHL06","ccgWG3gM","kVtpmCQ0","tp7WgxJC","tPTp9Hrq","TpWsnry","QvhBhSnL","BVCNK1Gr","ZzXfB9pf","kkxvh75","S26f1k0","Psfsrwg2","r26VtTJH"],
+        election: ["kVgc2Znj","wh8DxxjF","d0d7fkp5","VWx6dXxg","R4DVKHCQ","XxxXTNQ9","Dx4sWcm","67Y1tLrq","b58PZS6K","Jj1JN3d5"],
+        madrasa: ["MxrNgzBK","w2KvnpN","N6dT6Vhc","spqnvtM2","8g2WFWtF","W4mdZr90","nMHCwQrB","dw6B10Lx","LDQcq5zd","5xWbYQKh","0Vh6xXfJ","V0VS5RLx","wFrSqdNf","5gF3wzH0"],
+        personal: ["pBJPyPxZ","JRgVV795","G4QszZx3","WWWhsNhk","QvWtFryG","wN3chGfq","6RXTLR9d","kdv6r7D","ns90dzs1","q3NkP1C2","twxvgjTK","vvzQmq3x","Xxz5ZLFz","hRkjRfFs","GQh4Kgdb","7xYTx9YR","4wy3ds9t","WvTdHFTk","4Z7bM2nZ","zhzJtGDw"]
+    };
+
+    function loadPhotos(category, element) {
+        document.querySelectorAll('.p-btn').forEach(btn => btn.classList.remove('active'));
+        element.classList.add('active');
+        const display = document.getElementById('photo-display');
+        display.innerHTML = "";
+        
+        myCollection[category].forEach(id => {
+            const img = document.createElement('img');
+            img.src = "https://i.ibb.co/" + id + "/image.jpg"; // সরাসরি ডিরেক্ট লিঙ্ক
+            img.className = 'p-img';
+            img.onclick = () => window.open("https://ibb.co/" + id, '_blank');
+            img.onerror = function() { 
+                // যদি প্রথম লিঙ্কে কাজ না করে, তবে দ্বিতীয় ফরম্যাট ট্রাই করবে
+                this.src = "https://i.ibb.co.com/" + id + "/image.jpg"; 
+            };
+            display.appendChild(img);
+        });
+    }
+</script>
+
+    <div id="photo-display" class="photo-display">
+        <p class="bn" style="color: #ccc; font-size: 14px; padding: 20px;">বাটনে ক্লিক করে ছবিগুলো দেখুন</p>
+    </div>
+</div>
+
+<style>
+    .p-btn { padding: 10px 15px; border: 1px solid #eee; background: #fff; color: var(--primary); border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; display: flex; align-items: center; gap: 5px; font-size: 14px; }
+    .p-btn.active, .p-btn:hover { background: var(--primary); color: white; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .photo-display { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; padding: 5px; }
+    .p-img { width: 100%; height: 140px; object-fit: cover; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); cursor: pointer; animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+</style>
+
+<script>
     // এই স্ক্রিপ্টটি অন্য সব কোডের সাথে মিশবে না, এটি আলাদাভাবে কাজ করবে
     function fixLink(url) { 
         return url.replace("ibb.co.com", "i.ibb.co") + ".jpg"; 
