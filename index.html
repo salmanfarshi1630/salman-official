@@ -46,6 +46,46 @@
 
         .btn-box { display: inline-block; padding: 12px 25px; background: var(--green); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 15px; transition: 0.3s; }
         footer { text-align: center; padding: 30px; color: #fff; background: #1e1e1e; border-radius: 15px 15px 0 0; margin-top: 50px; }
+        /* সার্টিফিকেট গ্যালারি ডিজাইন */
+.cert-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    gap: 20px; 
+    margin-top: 20px; 
+}
+
+.cert-card { 
+    background: var(--card); 
+    padding: 10px; 
+    border-radius: 12px; 
+    border: 1px solid #e0e0e0; 
+    text-align: center; 
+    transition: 0.3s; 
+    cursor: pointer; 
+    text-decoration: none; /* লিংকের নিচের দাগ মুছতে */
+    display: block; 
+}
+
+.cert-card:hover { 
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1); 
+    transform: translateY(-5px); 
+    border-color: var(--primary); 
+}
+
+.cert-img { 
+    width: 100%; 
+    height: auto; 
+    border-radius: 8px; 
+    border: 1px solid #f0f0f0; 
+    display: block; 
+}
+
+.cert-title { 
+    margin-top: 10px; 
+    font-weight: bold; 
+    color: var(--text); 
+    font-size: 14px; 
+}
     </style>
 </head>
 <body data-theme="light">
@@ -211,7 +251,52 @@
             <div class="exp-item">Typing (BN/EN)</div>
             <div class="exp-item">Online Applications</div> <div class="exp-item">Data Entry</div> <div class="exp-item">Section Commandership</div> </div>
     </div>
+<div id="certificates" class="page-section">
+    <h2 style="color:var(--primary); text-align: center;"><i class="fas fa-award"></i> অর্জিত সনদসমূহ</h2>
+    <p style="text-align: center; color: #666; font-size: 15px; margin-bottom: 20px;">পুরো স্ক্রিন জুড়ে সার্টিফিকেট দেখতে ছবির ওপর ক্লিক করুন</p>
+    
+    <div class="cert-grid">
+        <a href="https://ibb.co.com/yFDv63M4" target="_blank" class="cert-card">
+            <img src="https://i.ibb.co.com/yFDv63M4/image.jpg" class="cert-img" alt="সনদ ১">
+            <div class="cert-title">আনসার ও ভিডিপি সনদ (১)</div>
+        </a>
 
+        <a href="https://ibb.co.com/LzVFd8pC" target="_blank" class="cert-card">
+            <img src="https://i.ibb.co.com/LzVFd8pC/image.jpg" class="cert-img" alt="সনদ ২">
+            <div class="cert-title">আনসার ও ভিডিপি সনদ (২)</div>
+        </a>
+
+        <a href="https://ibb.co.com/qF3dWv93" target="_blank" class="cert-card">
+            <img src="https://i.ibb.co.com/qF3dWv93/image.jpg" class="cert-img" alt="সনদ ৩">
+            <div class="cert-title">ট্রেনিং সনদ (Presentation)</div>
+        </a>
+
+        <a href="https://ibb.co.com/Jjc7dLd4" target="_blank" class="cert-card">
+            <img src="https://i.ibb.co.com/Jjc7dLd4/image.jpg" class="cert-img" alt="সনদ ৪">
+            <div class="cert-title">মানি ম্যানেজমেন্ট সনদ</div>
+        </a>
+
+        <a href="https://ibb.co.com/W453tRGg" target="_blank" class="cert-card">
+            <img src="https://i.ibb.co.com/W453tRGg/image.jpg" class="cert-img" alt="সনদ ৫">
+            <div class="cert-title">ইমেইল রাইটিং সনদ</div>
+        </a>
+
+        <a href="https://ibb.co.com/NdjPHKJ1" target="_blank" class="cert-card">
+            <img src="https://i.ibb.co.com/NdjPHKJ1/image.jpg" class="cert-img" alt="সনদ ৬">
+            <div class="cert-title">লেখালেখির হাতেখড়ি সনদ</div>
+        </a>
+
+        <a href="https://ibb.co.com/Psv84XVX" target="_blank" class="cert-card">
+            <img src="https://i.ibb.co.com/Psv84XVX/image.jpg" class="cert-img" alt="সনদ ৭">
+            <div class="cert-title">কমিউনিকেশন হ্যাকস সনদ</div>
+        </a>
+
+        <a href="https://ibb.co.com/hxnJyV9M" target="_blank" class="cert-card">
+            <img src="https://i.ibb.co.com/hxnJyV9M/image.jpg" class="cert-img" alt="সনদ ৮">
+            <div class="cert-title">১০ মিনিট স্কুল সনদ</div>
+        </a>
+    </div>
+</div>
     <div id="gallery" class="page-section" style="text-align: center;">
         <h2 class="bn" style="color:var(--primary); font-size: 24px; margin-bottom: 20px;"><i class="fas fa-images"></i> গ্যালারি ও ফটো</h2>
         <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 25px;">
